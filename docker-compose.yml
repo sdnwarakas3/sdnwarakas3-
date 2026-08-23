@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: warakas3
+      POSTGRES_USER: warakas3
+      POSTGRES_PASSWORD: warakas3_ganti_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U warakas3 -d warakas3"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgresql://warakas3:warakas3_ganti_password@postgres:5432/warakas3
+      DATABASE_SSL: "false"
+    ports:
+      - "8080:8080"
+volumes:
+  postgres_data:

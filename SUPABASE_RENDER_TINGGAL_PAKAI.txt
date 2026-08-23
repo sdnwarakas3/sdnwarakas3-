@@ -1,0 +1,13 @@
+SDN WARAKAS 3 - DEPLOY ONLINE
+
+Database: Supabase PostgreSQL
+Server: Render
+Sinkronisasi: HTTP API + WebSocket
+
+ENV:
+DATABASE_URL=connection string PostgreSQL dari Supabase
+ADMIN_USER=admin
+ADMIN_PASS=ganti-dengan-sandi-kuat
+DATABASE_SSL=true
+
+Setelah deploy, gunakan satu URL HTTPS hasil Render pada semua HP.
